@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Laila&display=swap');
+
+.navbar {
+    background-color: rgb(31, 29, 29, 0.96);
+    background-color: #053e23;
+}
+
+.navbar a {
+    color: white;
+}
+
+.navbar a:hover {
+    color: #198754;
+}
+
+.navbar-nav .nav-link.active {
+    color: white;
+}
+
+.nav-link.disabled {
+    color: rgb(197, 195, 195);
+}
+
+.content {
+    position: relative;
+    height: 660px;
+}
+
+.content::before{
+    content: "";
+    background-image: url("../img/abt1.jpg");
+    background-size: 100vw auto;
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 98.9vw;
+    height: inherit;
+    opacity: 0.4;
+    z-index: -1;
+}
+
+.inner-content {
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.content-img img{
+    width: 650px;
+    height: auto;
+    margin: 20px;
+}
+
+.content-info {
+    padding: 30px;
+    padding-bottom: 17px;
+    margin: 100px 40px;
+    margin-bottom: 20px;
+    width: 750px;
+    background-color: rgba(146, 224, 51, 0.74);
+    /* border: 2px solid black; */
+}
+
+.content-info p {
+    margin-top: 0;
+    margin-bottom: 1.2rem;
+    /* font-family: 'Laila', sans-serif;
+    font-size: 15px; */
+}
+.content-info h1 {
+    margin-bottom: 1.5rem;
+    font-family: 'Courgette', cursive;
+}

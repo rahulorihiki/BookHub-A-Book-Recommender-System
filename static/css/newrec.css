@@ -1,0 +1,10 @@
+.container-image {
+    background-image: url("../img/book3a.jpeg");
+    background-size: 100vw 100%;
+    background-repeat: no-repeat;
+    margin: 0px 0px;
+    height: 800px;
+    display: flex;
+    align-items: flex-start;
+}
+

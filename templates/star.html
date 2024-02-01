@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Star</title>
+    <link rel="stylesheet" href="../static/css/star.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="rating">
+      <div class="post">
+        <div class="imageadd">
+          <img
+            src="https://ak.picdn.net/shutterstock/videos/26784172/thumb/1.jpg"
+            style="height: 45vh; margin: 3rem; width: 80%"
+            alt=""
+          />
+          <div class="text mt-4">Thanks for rating us!</div>
+        </div>
+        <!-- <a href="detail.html"><div class="close">CLOSE</div></a>
+        <div class="edit">EDIT</div> -->
+      </div>
+      <div class="star-rating">
+        <form
+          action="{{url_for('starss' , isbn2 = isbn , ratings2 = ratings , votes2 = votes , up2 = up)}}"
+          method="post"
+        >
+          <h2 style="color: white; margin-top: 3rem; margin-bottom: 3rem">
+            Give us your rating below out of 5:
+          </h2>
+
+          <input type="radio" name="rate" id="rate-5" value="5" />
+          <label
+            for="rate-5"
+            class="fas fa-star"
+            style="margin-right: 2rem; margin-bottom: 1rem"
+          ></label>
+          <input type="radio" name="rate" id="rate-4" value="4" />
+          <label for="rate-4" class="fas fa-star"></label>
+          <input type="radio" name="rate" id="rate-3" value="3" />
+          <label for="rate-3" class="fas fa-star"></label>
+          <input type="radio" name="rate" id="rate-2" value="2" />
+          <label for="rate-2" class="fas fa-star"></label>
+          <input type="radio" name="rate" id="rate-1" value="1" />
+          <label
+            for="rate-1"
+            class="fas fa-star"
+            style="margin-left: 2rem; margin-bottom: 1rem"
+          ></label>
+          <header></header>
+          <div class="letsee">
+            <div class="textarea">
+              <textarea
+                id="post-feed"
+                cols="30"
+                placeholder="Describe your experience..."
+              ></textarea>
+            </div>
+            <div class="btn">
+              <button type="submit" onclick="eraseText();">Post</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const btn = document.querySelector("button");
+      const post = document.querySelector(".post");
+      const rating = document.querySelector(".star-rating");
+      const editBtn = document.querySelector(".edit");
+      btn.onclick = () => {
+        rating.style.display = "none";
+        post.style.display = "block";
+      };
+      //   editBtn.onclick = () => {
+      //     rating.style.display = "block";
+      //     post.style.display = "none";
+      //     console.log("working");
+      //     return false;
+      //   };
+
+      function eraseText() {
+        document.getElementById("post-feed").value = "";
+      }
+    </script>
+  </body>
+</html>

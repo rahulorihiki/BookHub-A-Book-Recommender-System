@@ -1,0 +1,137 @@
+/* .navbar {
+    background-color: rgb(31, 29, 29, 0.96);
+}
+
+.navbar a {
+    color: white;
+}
+
+.navbar a:hover {
+    color: #198754;
+}
+
+.navbar-nav .nav-link.active {
+    color: white;
+}
+
+.nav-link.disabled {
+    color: rgb(197, 195, 195);
+} */
+
+.box-1{
+    background-color: rgb(23, 23, 23);
+    /* background-color: rgb(225, 225, 243); */
+    height: auto;
+}
+
+.box-2{
+    /* background-image: url("../newimg/bgg.jpg"); */
+    /* opacity: 0.8; */
+    background-repeat: no-repeat;
+    background-size: 100vw auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-3 {
+    margin: 5vw;
+    height: auto;
+    width: 90vw;
+    background-color: rgba(32, 32, 32, 0.9);    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 0px;
+    /* display: none; */
+}
+
+.book{
+    /* background-color: rgba(219, 232, 243, 0.9); */
+    background-color: rgba(10, 10, 10, 0.9);
+    color: aliceblue;
+    height: 490px;
+    width: 250px;
+    margin: 10px;
+    text-align: center;
+    /* box-shadow: 0 15px 10px 1px rgba(0, 0, 0, 0.5); */
+    /* box-shadow: 7px 15px 12px 4px rgba(0, 0, 0, 0.4); */
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.roww{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    display: none;
+}
+
+.roww:nth-child(1), .roww:nth-child(2){
+    display: flex;
+}
+
+img{
+    height: 300px;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.book:hover{
+    transform: scale(1.1);
+    transition: 0.35s ease-in-out;
+}
+
+#loadMore{
+    background-color: rgb(122, 8, 79);
+    color: white;
+    width: 130px;
+    height: 50px;
+    border-radius: 28px;
+    margin: auto;
+    margin-bottom: 25px;
+}
+
+#loadMore:hover{
+    background-color: rgb(71, 12, 61);
+    transition: 0.3s ease-in-out;
+}
+
+.box-1 h1 {
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+.roww a {
+    text-decoration: none;
+    color: black;
+}
+
+footer {
+    background-color: rgb(3, 3, 53);
+}
+
+footer ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+footer ul li {
+    padding: 15px 35px;
+}
+
+footer p {
+    margin-bottom: 0px;
+    color: white;
+    padding: 20px;
+}
+
+footer p a {
+    color: white;
+    line-height: 28px;
+}

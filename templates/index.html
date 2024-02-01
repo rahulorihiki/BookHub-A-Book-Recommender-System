@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../static/css/newstyle.css">
+  </head>
+  <style>
+    .text-white {
+      color: white;
+    }
+  </style>
+  <body style="background-color: rgb(150, 141, 141)">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary py-3">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Book Recommender</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/recommend">Recommend</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/aboutus">About Us</a>
+            </li>
+            <!-- <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Dropdown
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link disabled">Contact</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+          {% if current_user.is_authenticated %}
+              <div class="navbar-nav ml-auto py-0 mx-3">
+                <a href="{{url_for('logout')}}" class="nav-item nav-link">Logout</a>
+              </div>
+              {% else %}
+              <div class="navbar-nav ml-auto py-0 mx-3">
+                <a href="{{url_for('login')}}" class="nav-item nav-link">Login</a>
+                <a href="{{url_for('signup')}}" class="nav-item nav-link">Register</a>
+              </div>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+			messages %} {% for category, message in messages %} 
+			<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert" style="margin-bottom:0px;">
+				{{ message }}
+			</div>
+		{% endfor %} {% endif %} {% endwith %}</div>
+    <div id="carouselExampleCaptions" class="carousel slide">
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
+      </div>
+      <div class="carousel-inner" style="height: 70vh">
+        <div class="carousel-item active">
+          <img
+            src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/fcc46669821541.5b8ecb79590ba.jpg"
+            class="d-block w-100" style="height: auto; margin: 0;"
+            alt="..."
+          />
+          <div class="carousel-caption d-none d-md-block">
+            <h5>First slide label</h5>
+            <p>Some representative placeholder content for the first slide.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img
+            src="https://zippypixels.com/wp-content/uploads/2015/04/2-book-cover-psd-mockup-hardcover-Vol3-2-824x542.jpg"
+            class="d-block w-100" style="height: auto; margin: 0;"
+            alt="..."
+          />
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Second slide label</h5>
+            <p>Some representative placeholder content for the second slide.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img
+            src="http://learn.canva.com/wp-content/uploads/2015/03/50-Amazing-Book-Covers_featured-image.png"
+            class="d-block w-100" style="height: auto; margin: 0;"
+            alt="..."
+          />
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Third slide label</h5>
+            <p>Some representative placeholder content for the third slide.</p>
+          </div>
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <!-- <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1
+            class="text-white my-3"
+            style="font-size: 50px; text-align: center"
+          >
+            Top 50 Books
+          </h1>
+        </div> -->
+        <!-- <div class="col-md-3" style="margin-top: 50px">
+          <div class="card">
+            <div class="card-body">
+              <img class="card-img-top" src="{{ image[i] }}" />
+              <h5 class="mt-2">{{ book_name[i] }}</h5>
+              <p>{{ author[i] }}</p>
+              <p>Votes - {{ votes[i] }}</p>
+              <p>Rating - {{ rating[i] }}</p>
+            </div>
+          </div>
+        </div> -->
+        <main>
+          <div class="box-1"><h1>Top 50 Books</h1>
+            <div class="box-2">
+              <div class="box-3">
+                {% for i in range(0 ,book_name|length , 4) %}
+                  <div class="roww">
+                  {% for j in range(i,i+4) if j <= 49 %} 
+                    <a href="{{url_for('detail' , isbn = isbn[j] , rating = rating[j] , numvotes = votes[j])}}"><div class="book">
+                      <img src="{{ image[j] }}" alt="" onerror="standby()" id="foo">
+                      <b>{{ book_name[j] }}</b> <br><b>Author: {{ author[j] }}</b> <br>Votes - {{ votes[j] }} <br>Rating - {{ rating[j] }}</div></a>
+                  {% endfor %}
+                  </div>
+                {% endfor %}
+                <button id="loadMore">Show More</button>
+              </div>
+            </div>
+          </div>
+        </main>
+    <!-- <div
+      class=""
+      style="
+        background-color: white;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+      "
+    > -->
+    <footer>
+      <ul class="nav justify-content-center border-bottom">
+        <li class="nav-item">
+          <a href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a href="#">FAQs</a>
+        </li>
+        <li class="nav-item">
+          <a href="#">About</a>
+        </li>
+      </ul>
+      <p class="text-center">&copy; 2022 Company, Inc <br><a href="https://www.vecteezy.com/">Vector Credits: Vecteezy</a></p>
+    </footer>
+    <!-- </div> -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+      integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../static/js/new.js"></script>
+  </body>
+</html>
