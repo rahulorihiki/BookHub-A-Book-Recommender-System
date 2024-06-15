@@ -135,3 +135,57 @@ footer p a {
     color: white;
     line-height: 28px;
 }
+
+.search-container {
+    position: relative;
+    width: 50%;
+    margin: auto;
+}
+
+#form-1 {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; 
+    flex-direction: column;
+}
+
+#submitme {
+    position: relative;
+    margin: auto;
+    text-align: center;
+    z-index: 1;
+}
+
+#recommend-header {
+    position: relative;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.dropdown-content {
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    display: none; /* hide dropdown by default */
+    z-index: 2;
+}
+
+.dropdown-content div {
+    padding: 12px;
+    cursor: pointer;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-content div:hover {
+    background-color: #f1f1f1;
+}
