@@ -1,9 +1,21 @@
-version: "3.0"
+version: '3.8'
 services:
-  web:
-    image: "webapp"
-    build: .
+  api_run:
+    build:
+      context: ./api  # Path to the directory containing the Dockerfile for api_run.py
+    command: python api_call.py
+    volumes:
+      - ./api:/app  # Mount the api directory to /app in the container
+    ports:
+      - "7000:7000"
+
+  app:
+    build:
+      context: .  # Path to the directory containing the Dockerfile for app.py
+    command: python app.py
+    volumes:
+      - .:/app  # Mount the root directory to /app in the container
     ports:
       - "5000:5000"
-  redis:
-    image: "redis" 
+    depends_on:
+      - api_run

@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Upgrade pip to ensure we get pre-built wheels where possible
-RUN pip install --upgrade pip
+# RUN pip install --upgrade pip
 
 # Copy application files and install Python dependencies
 COPY . /app

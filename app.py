@@ -236,8 +236,8 @@ if __name__ == '__main__':
     # Instead of APschedular we can also use the threading module of python to create a seperate thread and do the same but there also remember to prevent debug= true as told below to avaoid relaoding and all , its example is shown below
     # t = threading.Thread(target=print_rahul)
     # t.start()
-    scheduler.add_job(func=data_update, trigger='interval',id='interval-task-id', seconds = 30 )
-    scheduler.start()
+    # scheduler.add_job(func=data_update, trigger='interval',id='interval-task-id', seconds = 30 )
+    # scheduler.start()
     # Remember that If you write here debug = true then the APschedular will run the "print_rahul" function twice as by default what flask does is it runs the application as well as again run the application in 1 or 2 second for debugging purpose so below what we do is set reloading to false
-    app.run(use_reloader = False,host="0.0.0.0",port=5000)
+    app.run(host="0.0.0.0",port=5000,debug=True)
     # app.run(debug=True)
