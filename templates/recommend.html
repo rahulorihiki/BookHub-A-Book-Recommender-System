@@ -21,7 +21,7 @@
   <body style="background-color: rgb(150, 141, 141)">
     <nav class="navbar navbar-expand-lg bg-body-tertiary py-3">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Book Recommender</a>
+        <a class="navbar-brand" href="{{url_for('index')}}">BookHub</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -36,10 +36,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
+              <a class="nav-link active" aria-current="page" href="{{url_for('index')}}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/recommend">Recommend</a>
+              <a class="nav-link" href="/recommend">Get Recommendations</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/aboutus">About Us</a>
@@ -67,7 +67,7 @@
               <a class="nav-link disabled">Contact</a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
+          <!-- <form class="d-flex" role="search">
             <input
               class="form-control me-2"
               type="search"
@@ -77,7 +77,7 @@
             <button class="btn btn-outline-success" type="submit">
               Search
             </button>
-          </form>
+          </form> -->
           {% if current_user.is_authenticated %}
               <div class="navbar-nav ml-auto py-0 mx-3">
                 <a href="{{url_for('logout')}}" class="nav-item nav-link">Logout</a>
