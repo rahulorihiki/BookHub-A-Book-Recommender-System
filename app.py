@@ -14,11 +14,12 @@ from time import sleep
 from flask_apscheduler import APScheduler
 from sklearn.metrics.pairwise import cosine_similarity
 import warnings
+import pandas as pd
 
 
 
-books = pickle.load(open('books.pkl','rb'))
-ratings = pickle.load(open('ratings.pkl','rb'))
+books = pd.read_pickle('books.pkl')
+ratings = pd.read_pickle('ratings.pkl')
 
 app = Flask(__name__)
 app.app_context().push()
@@ -65,7 +66,7 @@ class User123( db.Model , UserMixin):
 
 @app.route('/')
 def index():
-    popular_df = pickle.load(open('popbooks.pkl','rb'))
+    popular_df = pd.read_pickle('popbooks.pkl')
     return render_template('index.html',
                            isbn = list(popular_df['ISBN'].values),
                            book_name = list(popular_df['Book-Title'].values),
@@ -160,7 +161,7 @@ def detail():
     ratings = request.args.get('rating')
     votes = request.args.get('numvotes')
     book123 = books[books['ISBN'] == isbn]
-    ratingsdf = pickle.load(open('ratings.pkl','rb'))
+    ratingsdf = pd.read_pickle('ratings.pkl')
     numb = ratingsdf.loc[(ratingsdf['User-ID'] == int(current_user.user_id)) & (ratingsdf['ISBN'] == isbn)]
     upd = "noupdate"
     if len(numb) > 0:
@@ -185,7 +186,7 @@ def star():
 @app.route("/starss" , methods = ['get' , 'post'])
 def starss():
     sleep(2)
-    ratingsdf = pickle.load(open('ratings.pkl','rb'))
+    ratingsdf = pd.read_pickle('ratings.pkl')
     isbn = request.args.get('isbn2')
     ratings = request.args.get('ratings2')
     votes = request.args.get('votes2')
