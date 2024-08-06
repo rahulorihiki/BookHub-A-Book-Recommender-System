@@ -15,11 +15,12 @@ from flask_apscheduler import APScheduler
 from sklearn.metrics.pairwise import cosine_similarity
 import warnings
 import pandas as pd
+import joblib
 
 
 
-books = pd.read_pickle('books.pkl')
-ratings = pd.read_pickle('ratings.pkl')
+books = joblib.load('books.pkl')
+ratings = joblib.load('ratings.pkl')
 
 app = Flask(__name__)
 app.app_context().push()
@@ -66,7 +67,7 @@ class User123( db.Model , UserMixin):
 
 @app.route('/')
 def index():
-    popular_df = pd.read_pickle('popbooks.pkl')
+    popular_df = joblib.load('popbooks.pkl')
     return render_template('index.html',
                            isbn = list(popular_df['ISBN'].values),
                            book_name = list(popular_df['Book-Title'].values),
@@ -84,8 +85,8 @@ def recommend_ui():
 @app.route('/recommend_books',methods=['post'])
 @login_required
 def recommend():
-    pt = pickle.load(open('pt.pkl','rb'))
-    similarity_scores = pickle.load(open('similarity_scores.pkl','rb'))
+    pt = joblib.load('pt.pkl')
+    similarity_scores = joblib.load('similarity_scores.pkl')
     user_input = request.form.get('user_input')
     if user_input == "":
         flash(f"Please type something in the search-box before submitting!!!" , 'danger')
@@ -134,16 +135,18 @@ def signup():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     if form.validate_on_submit():
-        users = pickle.load(open('users.pkl','rb'))
-        hashed_password = generate_password_hash(form.password.data, method='sha256')
+        users = joblib.load('users.pkl')
+        hashed_password = generate_password_hash(form.password.data)
         new_user = User123(username=form.username.data, email=form.email.data, password=hashed_password,user_id = (users.shape[0]+1))
         db.session.add(new_user)
         db.session.commit()
         print(request.form.get('location'))
         print(request.form.get('age'))
         df = {'User-ID':(users.shape[0]+1) , 'Location': request.form.get('location'), 'Age': float(request.form.get('age'))}
-        users = users.append(df, ignore_index = True)
-        pickle.dump(users,open('users.pkl','wb'))
+        # users = users.append(df, ignore_index = True)
+        df = pd.DataFrame([df])
+        users = pd.concat([users, df], ignore_index=True)
+        joblib.dump(users, 'users.pkl')
         return redirect(url_for('login'))
 
     return render_template('signup.html', form=form)
@@ -161,7 +164,7 @@ def detail():
     ratings = request.args.get('rating')
     votes = request.args.get('numvotes')
     book123 = books[books['ISBN'] == isbn]
-    ratingsdf = pd.read_pickle('ratings.pkl')
+    ratingsdf = joblib.load('ratings.pkl')
     numb = ratingsdf.loc[(ratingsdf['User-ID'] == int(current_user.user_id)) & (ratingsdf['ISBN'] == isbn)]
     upd = "noupdate"
     if len(numb) > 0:
@@ -186,7 +189,7 @@ def star():
 @app.route("/starss" , methods = ['get' , 'post'])
 def starss():
     sleep(2)
-    ratingsdf = pd.read_pickle('ratings.pkl')
+    ratingsdf = joblib.load('ratings.pkl')
     isbn = request.args.get('isbn2')
     ratings = request.args.get('ratings2')
     votes = request.args.get('votes2')
@@ -199,13 +202,13 @@ def starss():
     else:
         ratingsdf.loc[len(ratingsdf)] = [int(current_user.user_id) , isbn , float(user_rating) ]
         print(ratingsdf)
-    pickle.dump(ratingsdf,open('ratings.pkl','wb'))
+    joblib.dump(ratingsdf, 'ratings.pkl')
     return redirect(url_for('detail' , isbn = isbn , rating = ratings , numvotes = votes))
 
 def data_update(): 
     print("started updation")
     # For the updation of the top 50 popular books
-    ratings = pickle.load(open('ratings.pkl','rb'))
+    ratings = joblib.load('ratings.pkl')
     ratings_with_name = ratings.merge(books,on='ISBN')
     num_rating_df = ratings_with_name.groupby('Book-Title').count()['Book-Rating'].reset_index()
     num_rating_df.rename(columns={'Book-Rating':'num_ratings'},inplace=True)
@@ -215,7 +218,7 @@ def data_update():
     popular_df = num_rating_df.merge(avg_rating_df,on='Book-Title')
     popular_df = popular_df[popular_df['num_ratings']>=250].sort_values('avg_rating',ascending=False).head(50)
     popular_df = popular_df.merge(books,on='Book-Title').drop_duplicates('Book-Title')[['ISBN','Book-Title','Book-Author','Image-URL-M','num_ratings','avg_rating']]
-    pickle.dump(popular_df,open('popbooks.pkl','wb'))
+    joblib.dump(popular_df, 'popbooks.pkl')
     # For recommending using collaborative Filtering
     x = ratings_with_name.groupby('User-ID').count()['Book-Rating'] > 200
     padhe_likhe_users = x[x].index
@@ -226,8 +229,8 @@ def data_update():
     pt = final_ratings.pivot_table(index='Book-Title',columns='User-ID',values='Book-Rating')
     pt.fillna(0,inplace=True)
     similarity_scores = cosine_similarity(pt)
-    pickle.dump(pt,open('pt.pkl','wb'))
-    pickle.dump(similarity_scores,open('similarity_scores.pkl','wb'))
+    joblib.dump(pt, 'pt.pkl')
+    joblib.dump(similarity_scores, 'similarity_scores.pkl')
     print("updation is done ")
 
 
